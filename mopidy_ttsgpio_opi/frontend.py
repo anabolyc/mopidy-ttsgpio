@@ -1,6 +1,7 @@
 import logging
 import traceback
 
+from pyA20.gpio import gpio
 from mopidy import core
 
 import pykka
@@ -27,16 +28,10 @@ class TtsGpioOpi(pykka.ThreadingActor, core.CoreListener):
         self.speak_current_song(tl_track)
 
     def playback_state_changed(self, old_state, new_state):
-        if self.debug_gpio_simulate:
-            if new_state == core.PlaybackState.PLAYING:
-                self.simulator.playing_led.select()
-            else:
-                self.simulator.playing_led.deselect()
-        else:
-            if new_state == core.PlaybackState.PLAYING:
-                self.gpio_manager.set_led(True)
-            else:
-                self.gpio_manager.set_led(False)
+		if new_state == core.PlaybackState.PLAYING:
+			self.gpio_manager.set_led(gpio.HIGH)
+		else:
+			self.gpio_manager.set_led(gpio.LOW)
 
     def input(self, input_event):
         try:
