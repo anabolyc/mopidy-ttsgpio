@@ -22,7 +22,7 @@ class GPIOManager():
         try:
             # GPIO Mode
             gpio.init()
-			gpio.setcfg(port.PA10, gpio.OUTPUT)
+            gpio.setcfg(port.PA10, gpio.OUTPUT)
             # GPIO.setup(self.led_pin, GPIO.OUT)
             self.correctlyLoaded = True
 
@@ -32,6 +32,6 @@ class GPIOManager():
 
     def set_led(self, led_state):
         if self.correctlyLoaded:
-			gpio.output(port.PA10, led_state)
+            gpio.output(port.PA10, led_state)
             # GPIO.output(self.led_pin, led_state)
     

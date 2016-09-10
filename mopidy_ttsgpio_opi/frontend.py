@@ -21,16 +21,16 @@ class TtsGpioOpi(pykka.ThreadingActor, core.CoreListener):
         self.menu = False
         self.core = core
         self.main_menu = MainMenu(self)
-		self.gpio_manager = GPIOManager(self, config['ttsgpio-opi'])
+        self.gpio_manager = GPIOManager(self, config['ttsgpio-opi'])
 
     def track_playback_started(self, tl_track):
         self.speak_current_song(tl_track)
 
     def playback_state_changed(self, old_state, new_state):
-		if new_state == core.PlaybackState.PLAYING:
-			self.gpio_manager.set_led(gpio.HIGH)
-		else:
-			self.gpio_manager.set_led(gpio.LOW)
+        if new_state == core.PlaybackState.PLAYING:
+            self.gpio_manager.set_led(gpio.HIGH)
+        else:
+            self.gpio_manager.set_led(gpio.LOW)
 
     def input(self, input_event):
         try:
