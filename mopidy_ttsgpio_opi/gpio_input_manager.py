@@ -30,10 +30,9 @@ class GPIOManager():
     def set_led(self, led_state):
         if self.correctlyLoaded:
             if led_state == 1:
-                subprocess.call(['/home/dronische/amp_on.sh'])
+                subprocess.Popen('echo 1 > /sys/class/gpio_sw/PA10/data', shell=True)
             else:
-                subprocess.call(['/home/dronische/amp_off.sh'])
+                subprocess.Popen('echo 0 > /sys/class/gpio_sw/PA10/data', shell=True)
             #echo 1 > /sys/class/gpio_sw/PA10/data
             #gpio.output(port.PA10, led_state)
             # GPIO.output(self.led_pin, led_state)
-    
