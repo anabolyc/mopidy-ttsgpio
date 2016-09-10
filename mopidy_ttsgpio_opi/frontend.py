@@ -6,6 +6,7 @@ from mopidy import core
 
 import pykka
 
+from .gpio_input_manager import GPIOManager
 from .main_menu import MainMenu
 from .tts import TTS
 
@@ -20,8 +21,6 @@ class TtsGpioOpi(pykka.ThreadingActor, core.CoreListener):
         self.menu = False
         self.core = core
         self.main_menu = MainMenu(self)
-
-		from .gpio_input_manager import GPIOManager
 		self.gpio_manager = GPIOManager(self, config['ttsgpio-opi'])
 
     def track_playback_started(self, tl_track):
