@@ -12,13 +12,13 @@ def get_version(filename):
 
 
 setup(
-    name='Mopidy-TtsGpio',
-    version=get_version('mopidy_ttsgpio/__init__.py'),
-    url='https://github.com/9and3r/mopidy-ttsgpio',
+    name='Mopidy-TtsGpio-OPI',
+    version=get_version('mopidy_ttsgpio_opi/__init__.py'),
+    url='https://github.com/anabolyc/mopidy-ttsgpio-opi',
     license='Apache License, Version 2.0',
-    author='9and3r',
-    author_email='9and3r@gmail.com',
-    description='Controll mopidy without screen using GPIO and TTS',
+    author='andrey.malyshenko',
+    author_email='andrey.malyshenko@gmail.com',
+    description='Controll external power line using GPIO',
     long_description=open('README.rst').read(),
     packages=find_packages(exclude=['tests', 'tests.*']),
     zip_safe=False,
@@ -35,7 +35,7 @@ setup(
     ],
     entry_points={
         'mopidy.ext': [
-            'ttsgpio = mopidy_ttsgpio:Extension',
+            'ttsgpio-opi = mopidy_ttsgpio_opi:Extension',
         ],
     },
     classifiers=[
