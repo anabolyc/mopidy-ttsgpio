@@ -5,7 +5,6 @@ import subprocess
 logger = logging.getLogger(__name__)
 longpress_time = 0.3
 
-
 class GPIOManager():
 
     def __init__(self, frontend, pins):
@@ -15,12 +14,9 @@ class GPIOManager():
 
         # Play Led
         self.led_pin = pins['pin_play_led']
+        self.inverted = pins['inverted']
 
         try:
-            # GPIO Mode
-            #gpio.init()
-            #gpio.setcfg(port.PA10, gpio.OUTPUT)
-            # GPIO.setup(self.led_pin, GPIO.OUT)
             self.correctlyLoaded = True
 
         except RuntimeError:
@@ -29,10 +25,7 @@ class GPIOManager():
 
     def set_led(self, led_state):
         if self.correctlyLoaded:
-            if led_state == 1:
-                subprocess.Popen('echo 1 > /sys/class/gpio_sw/PA10/data', shell=True)
+            if led_state == 0 if self.inverted else 1:
+                subprocess.Popen('echo 1 > /sys/class/gpio_sw/' + self.led_pin + '/data', shell=True)
             else:
-                subprocess.Popen('echo 0 > /sys/class/gpio_sw/PA10/data', shell=True)
-            #echo 1 > /sys/class/gpio_sw/PA10/data
-            #gpio.output(port.PA10, led_state)
-            # GPIO.output(self.led_pin, led_state)
+                subprocess.Popen('echo 0 > /sys/class/gpio_sw/' + self.led_pin + '/data', shell=True)
