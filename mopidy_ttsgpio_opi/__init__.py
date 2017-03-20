@@ -27,6 +27,7 @@ class Extension(ext.Extension):
         schema = super(Extension, self).get_config_schema()
         schema['debug_gpio_simulate'] = config.Boolean()
         schema['pin_play_led'] = config.String()
+        schema['inverted'] = config.Boolean()
         return schema
 
     def setup(self, registry):
